@@ -54,13 +54,13 @@ body{
 
 .header .circle .title h1{
     color: #fff;
-    font-size: 120px;
+    font-size: 50px;
     text-align: center;
 }
 
 .header .circle .title p{
     color: #fff;
-    font-size: 50px;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -107,13 +107,13 @@ body{
 
 .navbar .bar button i{
     color: #fff;
-    font-size: 70px;
+    font-size: 25px;
 }
 
 .navbar .bar .selected{
     background-color: rgba(244, 133, 145, 1);
-    margin-bottom: 150px;
-    outline: 35px solid #edf0f7;
+    margin-bottom: 75px;
+    outline: 15px solid #edf0f7;
 
     transition: .5s;
 }
