@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 * {
-    font-family: "Poppins";
+    font-family: "Quicksand";
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,7 +9,111 @@
 
 html,
 body {
-    background-color: #505050;
+    background-color: #edf0f7;
     width: 100%;
     height: 100vh;
+    overflow: hidden;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header{
+    width: 100vw;
+    height: 30%;
+}
+
+.header .circle{
+    width: 102%;
+    aspect-ratio: 1;
+    background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
+    border-radius: 50%;
+    
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header .circle .title
+{
+    width: 100%;
+    height: 25%;
+    
+    position: absolute;
+    top: 55%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .circle .title h1{
+    color: #fff;
+    font-size: 120px;
+    text-align: center;
+}
+
+.header .circle .title p{
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+}
+
+.navbar{
+    height: 8%;
+    width: 100vw;
+    
+    border-radius: 100px 100px 0 0;
+    
+    background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar .bar{
+    width: 80%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    list-style: none;
+}
+
+.navbar .bar button{
+    height: 90%;
+    aspect-ratio: 1;
+    border-radius: 150px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background-color: rgba(244, 133, 145, 0);
+
+    transition: .25s;
+    outline-width: 35px;
+    outline-color: #edf0f7;
+}
+
+.navbar .bar button i{
+    color: #fff;
+    font-size: 70px;
+}
+
+.navbar .bar .selected{
+    background-color: rgba(244, 133, 145, 1);
+    margin-bottom: 150px;
+    outline: 35px solid #edf0f7;
+
+    transition: .5s;
 }
