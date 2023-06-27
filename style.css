@@ -29,11 +29,8 @@ body{
 }
 
 .pages{
-    position: absolute;
-    top: 6%;
-    height: 86%;
-    width: 100%;
-    border: red solid 2px;
+    width: fit-content;
+    height: 92%;
 }
 
 .pages section{
