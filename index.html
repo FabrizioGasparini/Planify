@@ -10,21 +10,45 @@
     <title>Planify</title>
 </head>
 <body>
-    <section class="header">
-        <div class="circle">
-            <div class="title">
-                <h1 class="name">Ciao Fabrizio</h1>
-                <p class="subtitle">Cosa vuoi pianificare oggi?</p>
-            </div>
-        </div>
-    </section>
+    <div class="pages">
+        <section class="home selected">
+            <div class="header">
+                <div class="circle">
+                    <div class="title">
+                        <h1 class="name">Ciao Fabrizio</h1>
+                        <p class="subtitle">Cosa vuoi pianificare oggi?</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="plan">
+            <div class="header">
+                <div class="circle">
+                    <div class="title">
+                        <h1 class="name">Pianifica</h1>
+                        <p class="subtitle">Pianifica le tue giornate</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="settings">
+            <div class="header">
+                <div class="circle">
+                    <div class="title">
+                        <h1 class="name">Impostazioni</h1>
+                        <p class="subtitle">Modifica le Impostazione</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
     <section class="navbar">
         <div class="bar">
-            <button class="page selected" onclick="changePage(0)"><i class="fa-solid fa-house"></i></button>
-            <button class="page" onclick="changePage(1)"><i class="fa-solid fa-bars-progress"></i></button>
-            <button class="page" onclick="changePage(2)"><i class="fa-solid fa-gear"></i></button>
+            <button class="btn selected" onclick="changePage(0)"><i class="fa-solid fa-house"></i></button>
+            <button class="btn" onclick="changePage(1)"><i class="fa-solid fa-bars-progress"></i></button>
+            <button class="btn" onclick="changePage(2)"><i class="fa-solid fa-gear"></i></button>
         </div>
-    </section>
+    </div>
 
     <script> </script>
 </body>

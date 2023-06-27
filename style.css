@@ -10,23 +10,167 @@
 html,
 body {
     background-color: #edf0f7;
+    overflow: hidden;
 }
 
 body{
     width: 100vw;
     height: 100vh;
 
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.header{
-    width: 100vw;
-    height: 30%;
+.pages{
+    width: fit-content;
+    height: 92%;
 }
 
-.header .circle{
+.pages section{
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+}
+
+
+
+
+.plan{
+    left: 150vw;
+    transition: .5s;
+}
+
+.plan.selected{
+    left: 0;
+    transition: .5s;
+}
+
+
+.plan .header {
+    width: 100%;
+    height: 26%;
+}
+
+.plan .header .circle {
+    width: 85%;
+    aspect-ratio: 1;
+    background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 50%;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.plan .header .circle .title {
+    width: 100%;
+    height: 25%;
+
+    position: absolute;
+    top: 55%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.plan .header .circle .title h1 {
+    color: #fff;
+    font-size: 45px;
+    text-align: center;
+}
+
+.plan .header .circle .title p {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+
+
+.settings {
+    left: 150vw;
+    transition: .5s;
+}
+
+.settings.selected {
+    left: 0;
+    transition: .5s;
+}
+
+
+.settings .header {
+    width: 100%;
+    height: 26%;
+}
+
+.settings .header .circle {
+    width: 85%;
+    aspect-ratio: 1;
+    background: linear-gradient(45deg, #0ba360 0%, #3cba92 100%);
+    border-radius: 50%;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.settings .header .circle .title {
+    width: 100%;
+    height: 25%;
+
+    position: absolute;
+    top: 55%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings .header .circle .title h1 {
+    color: #fff;
+    font-size: 45px;
+    text-align: center;
+}
+
+.settings .header .circle .title p {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+.home{
+    left: -150vw;
+    transition: .5s;
+}
+
+.home.selected{
+    left: 0;
+    transition: .5s;
+}
+
+
+.home .header{
+    width: 100%;
+    height: 26%;
+}
+
+.home .header .circle{
     width: 102%;
     aspect-ratio: 1;
     background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
@@ -37,7 +181,7 @@ body{
     transform: translate(-50%, -50%);
 }
 
-.header .circle .title
+.home .header .circle .title
 {
     width: 100%;
     height: 25%;
@@ -51,13 +195,13 @@ body{
     justify-content: center;
 }
 
-.header .circle .title h1{
+.home .header .circle .title h1{
     color: #fff;
     font-size: 50px;
     text-align: center;
 }
 
-.header .circle .title p{
+.home .header .circle .title p{
     color: #fff;
     font-size: 20px;
     text-align: center;
@@ -66,9 +210,7 @@ body{
 .navbar{
     height: 8%;
     width: 100vw;
-    
-    border-radius: 100px 100px 0 0;
-    
+        
     background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
 
     display: flex;
@@ -76,7 +218,9 @@ body{
     justify-content: center;
 
     position: absolute;
-    bottom: -10px;
+    bottom: 0;
+
+    transition: color 0.5s;
 }
 
 .navbar .bar{
@@ -113,9 +257,8 @@ body{
 }
 
 .navbar .bar .selected{
-    background-color: rgba(244, 133, 145, 1);
-    margin-bottom: 75px;
-    outline: 15px solid #edf0f7;
+    margin-bottom: 65px;
+    outline: 12px solid #edf0f7;
 
     transition: .5s;
 }
