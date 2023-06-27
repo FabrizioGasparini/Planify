@@ -11,10 +11,12 @@ html,
 body {
     background-color: #edf0f7;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 body{
-    width: 100vw;
+    width: 100%;
     height: 100vh;
 
     position: relative;
@@ -144,10 +146,6 @@ body{
     font-size: 18px;
     text-align: center;
 }
-
-
-
-
 
 
 
