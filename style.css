@@ -425,13 +425,136 @@ body{
     font-size: 37px;
 }
 
+.edit-activity-page .buttons
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: calc(-25% - 10px);
+    width: 100%;
+    height: 7%;
+}
 
 
+.edit-activity-page .buttons div {
+    height: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.edit-activity-page .buttons .remove-activity button {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border-radius: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: linear-gradient(45deg, rgb(253, 44, 56) 3.3%, rgb(176, 2, 12) 98.4%);
+}
+
+.edit-activity-page .buttons .save-activity button {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border-radius: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: linear-gradient(45deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+}
+
+.edit-activity-page .buttons div button i {
+    color: #fff;
+    font-size: 25px;
+}
 
 
+.edit-activity-page .main {
+    margin-top: 50%;
 
+    width: 100%;
+    height: 60%;
 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
+.edit-activity-page .main div {
+    margin: 1.5%;
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.edit-activity-page .main div p {
+    font-size: 19px;
+    margin: 5px;
+}
+
+.edit-activity-page .main .name input {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+
+    border: #13547a 2px solid;
+    border-radius: 150px;
+
+    font-size: 19px;
+}
+
+.edit-activity-page .main .goal input {
+    width: 20%;
+    height: 100%;
+    text-align: center;
+
+    border: #13547a 2px solid;
+    border-radius: 150px;
+    font-size: 19px;
+}
+
+.edit-activity-page .main .repeats input {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border: #13547a 2px solid;
+    border-radius: 150px;
+}
+
+.edit-activity-page .main .expire-date input {
+    height: 100%;
+    width: 40%;
+
+    text-align: center;
+
+    border: #13547a 2px solid;
+    border-radius: 150px;
+    font-size: 15px;
+}
+
+.edit-activity-page .main .repeat-period select {
+    height: 100%;
+    width: 40%;
+
+    text-align: center;
+
+    border: #13547a 2px solid;
+    border-radius: 150px;
+    font-size: 15px;
+}
 
 
 

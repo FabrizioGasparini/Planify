@@ -106,25 +106,29 @@ function createActivity()
     addActivityPage.style.display = "block";
 }
 
-var repeats = document.querySelector("#activity-repeats")
+var repeats = document.querySelectorAll("#activity-repeats")
 
-var actName = document.querySelector("#activity-name")
-var actGoal = document.querySelector("#activity-goal")
-var actDate = document.querySelector("#activity-date")
-var actPeriod = document.querySelector("#activity-repeat-period")
+var actName = document.querySelectorAll("#activity-name")
+var actGoal = document.querySelectorAll("#activity-goal")
+var actDate = document.querySelectorAll("#activity-date")
+var actPeriod = document.querySelectorAll("#activity-repeat-period")
 
 
 function updateRepeatActivity()
 {
-    if(repeats.checked)
+    if(repeats[0].checked || repeats[1].checked)
     {
-        actDate.parentElement.style.display = "none";
-        actPeriod.parentElement.style.display = "";
+        actDate[0].parentElement.style.display = "none";
+        actDate[1].parentElement.style.display = "none";
+        actPeriod[0].parentElement.style.display = "";
+        actPeriod[1].parentElement.style.display = "";
     }
     else
     {
-        actPeriod.parentElement.style.display = "none";
-        actDate.parentElement.style.display = "";
+        actPeriod[0].parentElement.style.display = "none";
+        actPeriod[1].parentElement.style.display = "none";
+        actDate[0].parentElement.style.display = "";
+        actDate[1].parentElement.style.display = "";
     }
 }
 
@@ -136,15 +140,15 @@ updateRepeatActivity()
 
 const addActivity = async(event) =>
 {
-    const name = actName.value.toString();
-    const goal = parseInt(actGoal.value);
-    const repeat = repeats.checked
+    const name = actName[0].value.toString();
+    const goal = parseInt(actGoal[0].value);
+    const repeat = repeats[0].checked
     const current = 0
     
     var date;
     
-    if (repeat) date = actPeriod.value.toString();
-    else date = actDate.value.toString();
+    if (repeat) date = actPeriod[0].value.toString();
+    else date = actDate[0].value.toString();
     
     if (goal > current && name.length > 1)
     {    
@@ -161,10 +165,11 @@ const addActivity = async(event) =>
         
         loadActivities()
 
-        actName.value = "";
-        actGoal.value = "";
-        actDate.value = "";
-        repeats.checked = false;
+        actName[0].value = "";
+        actGoal[0].value = "";
+        actDate[0].value = "";
+        repeats[0].checked = false;
+        updateRepeatActivity()
     }
 }
     
@@ -178,12 +183,6 @@ function openEditActivity(id)
 
     editActivity(id)
 }
-
-function editActivity(id)
-{
-
-}
-
 
 const loadActivities = async() =>
 {
@@ -210,5 +209,61 @@ const loadActivities = async() =>
     `})
 }
 
-
 window.onload = loadActivities
+
+var currentActivityId = -1;
+
+function editActivity(id) {
+    currentActivityId = id;
+
+
+    db.open().then(function () 
+    {
+        return db.items
+            .where('id')
+            .equals(id)
+            .toArray();
+    }).then(function(items) 
+    {
+        var activity = items[0].activity;
+        var goal = items[0].goal;
+        var current = items[0].current;
+        var repeat = items[0].repeats;
+        var date = items[0].date;
+
+        actName[1].value = activity;
+        actGoal[1].value = goal;
+        repeats[1].checked = repeat;
+        
+        if(repeat) actPeriod[1].value = date;
+        else actDate[1].value = date;
+        updateRepeatActivity()
+    })
+}
+
+
+const saveActivity = async () => {
+    var activity = actName[1].value;
+    var goal = actGoal[1].value;
+    var current = 0;
+    var repeat = repeats[1].checked;
+
+    var date;
+    if (repeat) date = actPeriod[1].value;
+    else date = actDate[1].value;
+
+    await db.items.update(currentActivityId, {activity: activity, goal: goal, current: current, repeats: repeat, date: date})
+    await loadActivities();
+
+    editActivityPage.style.display = "none";
+    changePage(1);
+}
+
+const removeActivity = async () => {
+    await db.items.delete(currentActivityId)
+    await loadActivities();
+
+    editActivityPage.style.display = "none";
+    changePage(1);
+}
+

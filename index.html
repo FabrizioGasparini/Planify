@@ -74,7 +74,7 @@
                     <p>Data Limite</p>
                     <input type="date" name="date" id="activity-date">
                 </div>
-                <div class="repeat-period">
+                <div class="repeat-period" style="display: none;">
                     <p>Ripetizione</p>
                     <select name="repeat-period" id="activity-repeat-period">
                         <option value="GIORNO">Giorno</option>
@@ -115,14 +115,20 @@
                 <div class="repeat-period">
                     <p>Ripetizione</p>
                     <select name="repeat-period" id="activity-repeat-period">
-                        <option value="day">Giorno</option>
-                        <option value="week">Settimana</option>
-                        <option value="month">Mese</option>
-                        <option value="year">Anno</option>
+                        <option value="GIORNO">Giorno</option>
+                        <option value="SETTIMANA">Settimana</option>
+                        <option value="MESE">Mese</option>
+                        <option value="ANNO">Anno</option>
                     </select>
                 </div>
+                <div class="current">
+                    
+                </div>
             </div>
-            <div class="edit-activity"><button onclick="addActivity()"><i class="fa-solid fa-check"></i></button></div>
+            <div class="buttons">
+                <div class="remove-activity"><button onclick="removeActivity()"><i class="fa-solid fa-trash-can"></i></button></div>
+                <div class="save-activity"><button onclick="saveActivity()"><i class="fa-solid fa-check"></i></button></div>
+            </div>
         </section>
     </div>
     <section class="navbar">
