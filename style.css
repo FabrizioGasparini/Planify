@@ -29,8 +29,13 @@ body{
 }
 
 .pages{
-    width: fit-content;
+    width: 100%;
     height: 92%;
+}
+
+.pages section.selected{
+    left: 0;
+    transition: .5s;
 }
 
 .pages section{
@@ -39,29 +44,14 @@ body{
     height: 100%;
 }
 
-
-
-
-.plan{
-    left: 150vw;
-    transition: .5s;
-}
-
-.plan.selected{
-    left: 0;
-    transition: .5s;
-}
-
-
-.plan .header {
+.pages section .header {
     width: 100%;
     height: 26%;
 }
 
-.plan .header .circle {
+.pages section .header .circle {
     width: 85%;
     aspect-ratio: 1;
-    background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
     border-radius: 50%;
 
     position: absolute;
@@ -69,7 +59,7 @@ body{
     transform: translate(-50%, -50%);
 }
 
-.plan .header .circle .title {
+.pages section .header .circle .title {
     width: 100%;
     height: 25%;
 
@@ -82,16 +72,173 @@ body{
     justify-content: center;
 }
 
-.plan .header .circle .title h1 {
+.pages section .header .circle .title h1 {
     color: #fff;
     font-size: 45px;
     text-align: center;
 }
 
-.plan .header .circle .title p {
+.pages section .header .circle .title p {
     color: #fff;
     font-size: 18px;
     text-align: center;
+}
+
+
+
+
+
+.plan{
+    left: 150vw;
+    transition: .5s;
+}
+
+
+.plan .activities
+{
+    margin-top: 50%;
+
+    width: 100%;
+    height: 45%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.plan .activities .content
+{
+    width: 100%;
+    height: 100%;
+    
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+
+.plan .activities .activity
+{
+    width: 90%;
+    height: 125px;
+    min-height: 125px;
+    background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
+    border-radius: 15px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    margin: 10px;
+}
+
+
+.plan .activities .activity h1
+{
+    margin-top: 5px;
+    width: 90%;
+    color: #fff;
+    font-size: 25px;
+    text-align: left;
+}
+
+.plan .activities .activity p 
+{
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+}
+
+.plan .activities .activity .info
+{
+    margin-bottom: 5px;
+
+    width: 90%;
+    height: 35%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.plan .activities .activity .info .text
+{
+    display:  flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.plan .activities .activity .info .text p
+{
+    width: 50%;
+    font-size: 15px;
+}
+
+.plan .activities .activity .info .text .current
+{
+    text-align: left;
+}
+
+.plan .activities .activity .info .text .goal
+{
+    text-align: right;
+}
+
+.plan .activities .activity .info .progress-bar
+{
+    width: 100%;
+    height: 50%;
+    background-color: #fff;
+
+    border-radius: 50px;
+    
+    display: flex;
+    align-items: center;
+}
+
+.plan .activities .activity .info .progress-bar .progress
+{
+    margin-left: 3px;
+    width: calc(30% - 6px);
+    height: calc(100% - 6px);
+    
+    border-radius: 50px;
+
+    background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
+}
+
+.plan .create-activity
+{
+    margin-top: 25px;
+
+    width: 100%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+}
+
+.plan .create-activity button 
+{
+    height: 100%;
+    aspect-ratio: 1;
+    
+    border-radius: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: linear-gradient(45deg, #13547a 0%, #80d0c7 100%);
+}
+
+.plan .create-activity button i {
+    color: #fff;
+    font-size: 25px;
 }
 
 
@@ -102,65 +249,9 @@ body{
     transition: .5s;
 }
 
-.settings.selected {
-    left: 0;
-    transition: .5s;
-}
-
-
-.settings .header {
-    width: 100%;
-    height: 26%;
-}
-
-.settings .header .circle {
-    width: 85%;
-    aspect-ratio: 1;
-    background: linear-gradient(45deg, #0ba360 0%, #3cba92 100%);
-    border-radius: 50%;
-
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.settings .header .circle .title {
-    width: 100%;
-    height: 25%;
-
-    position: absolute;
-    top: 55%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.settings .header .circle .title h1 {
-    color: #fff;
-    font-size: 45px;
-    text-align: center;
-}
-
-.settings .header .circle .title p {
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-}
-
-
-
-
-
 
 .home{
     left: -150vw;
-    transition: .5s;
-}
-
-.home.selected{
-    left: 0;
     transition: .5s;
 }
 
@@ -171,9 +262,8 @@ body{
 }
 
 .home .header .circle{
-    width: 102%;
+    width: 101%;
     aspect-ratio: 1;
-    background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
     border-radius: 50%;
     
     position: absolute;
@@ -207,6 +297,146 @@ body{
     text-align: center;
 }
 
+
+
+
+.add-activity-page .header .circle .title .name
+{
+    font-size: 37px;
+}
+
+.add-activity-page .main
+{
+    margin-top: 50%;
+    
+    width: 100%;
+    height: 60%;
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.add-activity-page .main div
+{
+    margin: 1.5%;
+    width: 100%;
+    height: 15%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.add-activity-page .main div p{
+    font-size: 20px;
+    margin: 5px;
+}
+
+.add-activity-page .main .name input
+{
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    
+    border:#13547a 2px solid;
+    border-radius: 150px;
+
+    font-size: 20px;
+}
+
+.add-activity-page .main .goal input
+{
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    
+    border: #13547a 2px solid;
+    border-radius: 150px;
+    font-size: 20px;
+}
+
+.add-activity-page .main .repeats input
+{
+    height: 100%;
+    aspect-ratio: 1;
+    
+    border: #13547a 2px solid;
+    border-radius: 150px;
+}
+
+.add-activity-page .main .expire-date input
+{
+    height: 100%;
+    width: 40%;
+    
+    text-align: center;
+    
+    border: #13547a 2px solid;
+    border-radius: 150px;
+    font-size: 18px;
+}
+
+.add-activity-page .main .repeat-period select
+{
+    height: 100%;
+    width: 40%;
+    
+    text-align: center;
+    
+    border: #13547a 2px solid;
+    border-radius: 150px;
+    font-size: 18px;
+}
+
+
+.add-activity-page .add-activity {
+    margin-top: -25%;
+    
+    width: 100%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+}
+
+.add-activity-page .add-activity button {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border-radius: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: linear-gradient(45deg, #13547a 0%, #80d0c7 100%);
+}
+
+.add-activity-page .add-activity button i {
+    color: #fff;
+    font-size: 25px;
+}
+
+
+
+.edit-activity-page .header .circle .title .name
+{
+    font-size: 37px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .navbar{
     height: 8%;
     width: 100vw;
@@ -219,6 +449,7 @@ body{
 
     position: absolute;
     bottom: 6%;
+    left: 0;
 
     transition: color 0.5s;
 }
