@@ -253,7 +253,7 @@ function updateDate(item)
     {
         switch (item.date) {
             case "GIORNO":
-                if (diffDays > 0) update = true;
+                if (diffDays > 1) update = true;
                 break;
                 
                 case "SETTIMANA":
