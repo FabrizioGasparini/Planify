@@ -431,7 +431,7 @@ body{
     align-items: center;
     justify-content: center;
 
-    margin-top: calc(-25% - 10px);
+    margin-top: -22%;
     width: 100%;
     height: 7%;
 }
@@ -555,6 +555,102 @@ body{
     border-radius: 150px;
     font-size: 15px;
 }
+
+
+.edit-activity-page .main .current .info {
+    margin-top: 10px;
+
+    width: 50%;
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-activity-page .main .current .info .text 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    margin-bottom: 10px;
+}
+
+.edit-activity-page .main .current .info .text p {
+    width: 50%;
+    font-size: 15px;
+}
+
+.edit-activity-page .main .current .info .text .current {
+    text-align: left;
+}
+
+.edit-activity-page .main .current .info .text .goal {
+    text-align: right;
+}
+
+.edit-activity-page .main .current .info .progress-bar {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+
+    border-radius: 50px;
+
+    display: block;
+}
+
+.edit-activity-page .main .current .info .progress-bar .progress {
+    margin-left: 3px;
+
+    height: calc(100% - 6px);
+
+    border-radius: 50px;
+
+    background: linear-gradient(45deg, rgba(244, 133, 145, 1) 0%, rgba(244, 99, 114, 1) 100%);
+}
+
+.edit-activity-page .main .current .buttons
+{
+    height: 70%;
+    width: 40%;
+    flex-direction: row;
+}
+
+.edit-activity-page .main .current .buttons div
+{
+    height: 100%;
+}
+
+
+.edit-activity-page .buttons .remove-current button {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border-radius: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: linear-gradient(45deg, rgb(253, 44, 56) 3.3%, rgb(176, 2, 12) 98.4%);
+}
+
+.edit-activity-page .buttons .add-current button {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border-radius: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: linear-gradient(45deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+}
+
 
 
 

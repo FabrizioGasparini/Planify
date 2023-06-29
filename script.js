@@ -14,7 +14,7 @@ const editActivityPage = document.querySelector(".edit-activity-page")
 
 
 const db = new Dexie('Planify')
-db.version(2).stores({items: '++id, activity, current, goal, repeats, date'})
+db.version(4).stores({items: '++id, activity, current, goal, repeats, date, creation, lastUpdate'})
 
 
 changePage(0)
@@ -141,14 +141,26 @@ updateRepeatActivity()
 const addActivity = async(event) =>
 {
     const name = actName[0].value.toString();
+
     const goal = parseInt(actGoal[0].value);
+    const current = 0   
+
     const repeat = repeats[0].checked
-    const current = 0
-    
+
     var date;
-    
     if (repeat) date = actPeriod[0].value.toString();
     else date = actDate[0].value.toString();
+
+    const creationDate = new Date();
+
+    let day = creationDate.getDate();
+    let month = creationDate.getMonth() + 1;
+    let year = creationDate.getFullYear();
+
+    if(day < 10) day = "0" + day
+    if (month < 10) month = "0" + month
+
+    let currentDate = `${year}-${month}-${day}`;
     
     if (goal > current && name.length > 1)
     {    
@@ -160,7 +172,9 @@ const addActivity = async(event) =>
             current: current,
             goal: goal,
             repeats: repeat,
-            date: date
+            date: date,
+            creation: currentDate,
+            lastUpdate: currentDate
         })
         
         loadActivities()
@@ -189,28 +203,95 @@ const loadActivities = async() =>
     const allItems = await db.items.toArray()
 
     var newActivity = document.createElement("div")
-    activitiesParent.innerHTML = allItems.map(item => {
+    activitiesParent.innerHTML = allItems.map(item => 
+    {
+        var current = item.current
+
+        if(updateDate(item)) current = 0
+
         let dateText = item.repeats ? "OGNI<br> " + item.date : "ENTRO IL<br> " + item.date;
-        
+    
         return `
         <div class="activity" id=${item.id} onclick="openEditActivity(${item.id})">
-                <h1 class="name">${item.activity} (${parseInt(item.current / item.goal * 100)}%)</h1>
-                <div class="info">
-                    <div class="text">
-                        <p class="current">${item.current}</p>
-                        <p class="goal">${item.goal}</p>
-                    </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: calc(${parseInt(item.current / item.goal * 100)}% - 6px);"></div>
+            <h1 class="name">${item.activity} (${parseInt(current / item.goal * 100)}%)</h1>
+            <div class="info">
+                <div class="text">
+                    <p class="current">${current}</p>
+                    <p class="goal">${item.goal}</p>
                 </div>
+            <div class="progress-bar">
+                <div class="progress" style="width: calc(${parseInt(current / item.goal * 100)}% - 6px);"></div>
             </div>
-            <p class="date">${dateText}</p>
         </div>
-    `})
+        <p class="date">${dateText}</p>
+        </div>`
+    })
 }
 
+
+
+function updateDate(item)
+{
+    const today = new Date()
+    const lastUpdate = Date.parse(item.lastUpdate)
+
+    let day = today.getDate();
+    let month = today.getMonth() + 1;
+    let year = today.getFullYear();
+
+    if (day < 10) day = "0" + day
+    if (month < 10) month = "0" + month
+
+    let currentDate = `${year}-${month}-${day}`;
+
+    const diffTime = Math.abs(today - lastUpdate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+    var update = false;
+
+    if(lastUpdate != today)
+    {
+        switch (item.date) {
+            case "GIORNO":
+                if (diffDays > 0) update = true;
+                break;
+                
+                case "SETTIMANA":
+                if (diffDays > 7) update = true;
+                break;
+                
+                case "MESE":
+                if (diffDays > 30) update = true;
+                break;
+
+            case "MESE":
+                if (diffDays > 365) update = true;
+                break;
+        
+            default:
+                break;
+    }
+    }
+
+    if (update) 
+    {
+        if(item.current < item.goal)
+        {
+            sendNotification("Attività Scaduta", "Non hai completato in tempo l'attività " + item.actiivty)
+        }
+        db.items.update(item.id, { current: 0, lastUpdate: currentDate })
+    }
+    return update
+}
+
+
+    
 window.onload = loadActivities
 
+
+    
+const currentLabel = editActivityPage.querySelector(".current .info .text .current")
+const goalLabel = editActivityPage.querySelector(".main .info .text .goal")
 var currentActivityId = -1;
 
 function editActivity(id) {
@@ -231,13 +312,18 @@ function editActivity(id) {
         var repeat = items[0].repeats;
         var date = items[0].date;
 
+
         actName[1].value = activity;
         actGoal[1].value = goal;
         repeats[1].checked = repeat;
         
+        currentLabel.innerHTML = current;
+        goalLabel.innerHTML = goal;
+
         if(repeat) actPeriod[1].value = date;
         else actDate[1].value = date;
         updateRepeatActivity()
+        updateProgressBar(goal, current)
     })
 }
 
@@ -245,14 +331,24 @@ function editActivity(id) {
 const saveActivity = async () => {
     var activity = actName[1].value;
     var goal = actGoal[1].value;
-    var current = 0;
     var repeat = repeats[1].checked;
 
     var date;
     if (repeat) date = actPeriod[1].value;
     else date = actDate[1].value;
 
-    await db.items.update(currentActivityId, {activity: activity, goal: goal, current: current, repeats: repeat, date: date})
+    const creationDate = new Date();
+
+    let day = creationDate.getDate();
+    let month = creationDate.getMonth() + 1;
+    let year = creationDate.getFullYear();
+
+    if (day < 10) day = "0" + day
+    if (month < 10) month = "0" + month
+
+    let currentDate = `${year}-${month}-${day}`;
+
+    await db.items.update(currentActivityId, { activity: activity, goal: goal, repeats: repeat, date: date})
     await loadActivities();
 
     editActivityPage.style.display = "none";
@@ -267,3 +363,53 @@ const removeActivity = async () => {
     changePage(1);
 }
 
+const editProgressBar = editActivityPage.querySelector(".progress-bar .progress")
+
+function updateProgressBar(goal, current)
+{
+    editProgressBar.style.width = "calc(" + current / goal * 100 + "% - 6px)";
+
+    currentLabel.innerHTML = current;
+}
+
+const addCurrent = async() =>
+{
+    var newCurrent;
+
+    db.open().then(function () {
+        return db.items
+            .where('id')
+            .equals(currentActivityId)
+            .toArray();
+    }).then(function (items) { 
+        if(items[0].current < items[0].goal) 
+        {
+            newCurrent = items[0].current + 1 
+        }
+        else newCurrent = items[0].current;
+
+        db.items.update(currentActivityId, { current: newCurrent })
+        updateProgressBar(items[0].goal, newCurrent)
+    })
+
+}
+
+const removeCurrent = async() =>
+{
+    var newCurrent;
+
+    db.open().then(function () {
+        return db.items
+            .where('id')
+            .equals(currentActivityId)
+            .toArray();
+    }).then(function (items) {
+        if (items[0].current > 0) {
+            newCurrent = items[0].current - 1
+        }
+        else newCurrent = items[0].current;
+
+        db.items.update(currentActivityId, { current: newCurrent })
+        updateProgressBar(items[0].goal, newCurrent)
+    })
+}
