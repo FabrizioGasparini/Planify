@@ -34,16 +34,32 @@
             </section>
             <div class="activities">
                 <div class="content">
+                    <div class="activity" id=0 onclick="openEditActivity(0)">
+                        <div class="name">
+                            <h1>Ciao</h1>
+                            <p>100%</p>
+                        </div>
+                        <div class="info">
+                            <div class="text">
+                                <p class="current"></p>
+                                <p class="goal"></p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                        </div>
+                        <p class="date"></p>
+                    </div>
                 </div>
             </div>
             <div class="create-activity"><button onclick="createActivity()"><i class="fa-solid fa-plus"></i></button></div>
         </section>
-        <section class="settings">
+        <section class="account">
             <section class="header">
                 <div class="circle">
                     <div class="title">
-                        <h1 class="name">Impostazioni</h1>
-                        <p class="subtitle">Modifica le Impostazione</p>
+                        <h1 class="name">Account</h1>
+                        <p class="subtitle">Accedi o registra il tuo account</p>
                     </div>
                 </div>
             </section>
@@ -65,7 +81,7 @@
                 </div>
                 <div class="goal">
                     <p>Obiettivo</p>
-                    <input type="number" name="goal" id="activity-goal">
+                    <input type="number" name="goal" id="activity-goal" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                 </div>
                 <div class="repeats">
                     <p>Si ripete?</p>
@@ -103,15 +119,15 @@
                 </div>
                 <div class="goal">
                     <p>Obiettivo</p>
-                    <input type="number" name="goal" id="activity-goal">
+                    <input type="number" name="goal" id="activity-goal" onchange="saveActivity()" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                 </div>
                 <div class="repeats">
                     <p>Si ripete?</p>
-                    <input type="checkbox" name="repeats" id="activity-repeats" onclick="updateRepeatActivity()">
+                    <input type="checkbox" name="repeats" id="activity-repeats">
                 </div>
                 <div class="expire-date">
                     <p>Data Limite</p>
-                    <input type="date" name="date" id="activity-date">
+                    <input type="date" name="date" id="activity-date" >
                 </div>
                 <div class="repeat-period">
                     <p>Ripetizione</p>
@@ -125,7 +141,7 @@
                 <div class="current">
                     <div class="info">
                         <div class="text">
-                            <p class="current"></p>
+                            <input type="number" name="current" class="current" id="activity-current" onchange="saveActivity()" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             <p class="goal"></p>
                         </div>
                         <div class="progress-bar">
@@ -140,7 +156,7 @@
             </div>
             <div class="buttons">
                 <div class="remove-activity"><button onclick="removeActivity()"><i class="fa-solid fa-trash-can"></i></button></div>
-                <div class="save-activity"><button onclick="saveActivity()"><i class="fa-solid fa-check"></i></button></div>
+                <div class="save-activity"><button onclick="saveActivity(true)"><i class="fa-solid fa-check"></i></button></div>
             </div>
         </section>
     </div>
@@ -148,7 +164,7 @@
         <div class="bar">
             <button class="btn selected" onclick="changePage(0)"><i class="fa-solid fa-house"></i></button>
             <button class="btn" onclick="changePage(1)"><i class="fa-solid fa-bars-progress"></i></button>
-            <button class="btn" onclick="changePage(2)"><i class="fa-solid fa-gear"></i></button>
+            <button class="btn" onclick="changePage(2)"><i class="fa-solid fa-user"></i></button>
         </div>
     </div>
 

@@ -137,18 +137,40 @@ body{
     margin: 10px;
 }
 
-
-.plan .activities .activity h1
+.plan .activities .activity .title
 {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.plan .activities .activity .title h1
+{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    margin-right: 5px;
     margin-top: 5px;
     width: 90%;
+    height: 100%;
     color: #fff;
     font-size: 25px;
     text-align: left;
+    margin-left: 2px;
 }
 
-.plan .activities .activity p 
+.plan .activities .activity .title p 
 {
+    color: #fff;
+    width: 10%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.plan .activities .activity p {
     color: #fff;
     font-size: 10px;
     text-align: center;
@@ -202,9 +224,8 @@ body{
 
 .plan .activities .activity .info .progress-bar .progress
 {
-    margin-left: 3px;
-    width: calc(30% - 6px);
-    height: calc(100% - 6px);
+    margin-left: 1.5%;
+    height: 50%;
     
     border-radius: 50px;
 
@@ -244,7 +265,8 @@ body{
 
 
 
-.settings {
+.account 
+{
     left: 150vw;
     transition: .5s;
 }
@@ -577,9 +599,17 @@ body{
     margin-bottom: 10px;
 }
 
-.edit-activity-page .main .current .info .text p {
-    width: 50%;
+.edit-activity-page .main .current .info .text .goal {
+    width: 70%;
     font-size: 15px;
+}
+
+.edit-activity-page .main .current .info .text .current {
+    font-size: 15px;
+    padding: 2px 5px;
+    width: 20%;
+    border: #13547a 2px solid;
+    border-radius: 150px;
 }
 
 .edit-activity-page .main .current .info .text .current {
