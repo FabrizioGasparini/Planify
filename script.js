@@ -116,7 +116,7 @@ var actPeriod = document.querySelectorAll("#activity-repeat-period")
 
 function updateRepeatActivity()
 {
-    if(repeats[0].checked || repeats[1].checked)
+    if ((repeats[0].checked && addActivityPage.style.display) || (repeats[1].checked && editActivityPage.style.display))
     {
         actDate[0].parentElement.style.display = "none";
         actDate[1].parentElement.style.display = "none";
