@@ -17,7 +17,7 @@ const db = new Dexie('Planify')
 db.version(4).stores({items: '++id, activity, current, goal, repeats, date, creation, lastUpdate'})
 
 
-changePage(0)
+changePage(1)
 
 function changePage(id){
     if (addActivityPage.style.display == "block")
@@ -350,9 +350,9 @@ const saveActivity = async (closePage) => {
 
     let currentDate = `${year}-${month}-${day}`;
      
-    if (parseInt(goal) < parseInt(current)) current = goal
+    if (parseInt(goal) < parseInt(current)) current = parseInt(goal)
     
-    db.items.update(currentActivityId, { activity: activity, goal: goal, current: current, repeats: repeat, date: date})
+    db.items.update(currentActivityId, { activity: activity, goal: goal, current: parseInt(current), repeats: repeat, date: date})
     await editActivity(currentActivityId);
     await loadActivities()
     
@@ -381,19 +381,23 @@ function updateProgressBar(goal, current)
 
 const addCurrent = async() =>
 {
+    var newCurrent = 0;
+
     db.open().then(function () {
         return db.items
             .where('id')
             .equals(currentActivityId)
             .toArray();
-    }).then(function (items) { 
-        if(items[0].current < items[0].goal) 
-        {
-            actCurrent.value = items[0].current + 1 
+    }).then(function (items) {
+        saveActivity()
+        if (items[0].current < items[0].goal) {
+            newCurrent = items[0].current + 1
         }
-        else actCurrent.value = items[0].current;
+        else newCurrent = items[0].current;
 
-        db.items.update(currentActivityId, { current: actCurrent.value })
+        actCurrent.value = parseInt(newCurrent);
+
+        db.items.update(currentActivityId, { current: parseInt(newCurrent) })
         editActivity(currentActivityId)
         saveActivity(false)
     })
@@ -410,12 +414,15 @@ const removeCurrent = async() =>
         .equals(currentActivityId)
         .toArray();
     }).then(function (items) {
+        saveActivity()
         if (items[0].current > 0) {
-            actCurrent.value = items[0].current - 1
+            newCurrent = items[0].current - 1
         }
-        else actCurrent.value = items[0].current;
+        else newCurrent = items[0].current;
         
-        db.items.update(currentActivityId, { current: actCurrent.value })
+        actCurrent.value = newCurrent;
+
+        db.items.update(currentActivityId, { current: newCurrent })
         editActivity(currentActivityId)
         saveActivity(false)
     })
